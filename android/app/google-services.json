@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "426888385616",
+    "project_id": "troop-2be6d",
+    "storage_bucket": "troop-2be6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426888385616:android:230c060663d41c21b6ed55",
+        "android_client_info": {
+          "package_name": "com.tradebook.troop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426888385616-f2pjtropj2988579enhbnnard7d9co3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD2E3Bek4GlVUBZuuIl1uM3DkWw4yPzFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426888385616-f2pjtropj2988579enhbnnard7d9co3p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
