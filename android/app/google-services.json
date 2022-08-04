@@ -29,6 +29,13 @@
             {
               "client_id": "426888385616-f2pjtropj2988579enhbnnard7d9co3p.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "426888385616-605jamolc45bre0e449tll2etu9v0hqo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tradebook.troop"
+              }
             }
           ]
         }
