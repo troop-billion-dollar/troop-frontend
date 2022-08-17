@@ -20,7 +20,9 @@ dependencies:
     path: packages/platform_helper/
   troop_ui:
     path: packages/troop_ui/
-
+  routemaster: ^1.0.1
+  flutter_riverpod: ^1.0.4
+  logging: ^1.0.2
 
 dev_dependencies:
   flutter_test:
