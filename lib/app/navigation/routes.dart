@@ -1,5 +1,5 @@
 import 'transition_page.dart' as customTransition;
-import '../../components/auth/auth.dart';
+import '../../components/auth/presentation/auth.dart';
 import 'package:routemaster/routemaster.dart';
 
 const _login = '/login';
