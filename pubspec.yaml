@@ -10,7 +10,7 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
+    sdk: flutterSS
 
   cupertino_icons: ^1.0.2
   firebase_core: ^1.20.0
