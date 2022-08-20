@@ -6,20 +6,20 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.1 <3.0.0"
+  sdk: ">=2.17.6 <3.0.0"
 
 dependencies:
   flutter:
-    sdk: flutterSS
+    sdk: flutter
 
   cupertino_icons: ^1.0.2
   firebase_core: ^1.20.0
   authentication_repository:
-    path: packages/authentication_repository/
+    path: package/authentication_repository/
   platform_helper:
-    path: packages/platform_helper/
+    path: package/platform_helper/
   troop_ui:
-    path: packages/troop_ui/
+    path: package/troop_ui/
   routemaster: ^1.0.1
   flutter_riverpod: ^1.0.4
   logging: ^1.0.2
