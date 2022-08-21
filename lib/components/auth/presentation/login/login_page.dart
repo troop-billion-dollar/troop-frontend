@@ -13,120 +13,85 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TroopColors.blue,
-      body: Center(
-        child: GestureDetector(
-          onTap: () => Routemaster.of(context).replace(AppRoutes.register),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 35.0, right: 35.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 130,
-                ),
-                Center(
-                  child: SvgPicture.asset(
-                    "assets/images/troop_logo.svg",
-                    height: 96,
-                    width: 96,
+      body: SingleChildScrollView(
+        child: Center(
+          child: GestureDetector(
+            onTap: () => Routemaster.of(context).replace(AppRoutes.register),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 35.0, right: 35.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 90,
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "Welcome to Troop,",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: TroopColors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                const Text(
-                  "Sign Up in just 2 Steps!",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: TroopColors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                InputField(
-                  hintText: 'Username',
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                InputField(
-                  hintText: 'E-mail Address or Phone number',
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                InputField(
-                  hintText: 'Password',
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                InputField(
-                  hintText: 'Re-Password',
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                InputField(
-                  hintText: 'City',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  children: [
-                    Checkbox(value: false, onChanged: ((value) {})),
-                    const Text(
-                      "Agree terms and conditions",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.white,
-                      ),
+                  Center(
+                    child: SvgPicture.asset(
+                      "assets/images/troop_logo.svg",
+                      height: 96,
+                      width: 96,
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                BusyButton(title: "Signup"),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  "Already have an account?",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text(
-                  "LogIn",
-                  style: const TextStyle(
-                    decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff5C59FF),
-                    fontSize: 14,
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  InputField(
+                    hintText: 'Phone number, username or email',
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  InputField(
+                    hintText: 'Password',
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(value: false, onChanged: ((value) {})),
+                      const Text(
+                        "Agree terms and conditions",
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  BusyButton(title: "Signup"),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    "Already have an account?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const Text(
+                    "LogIn",
+                    style: const TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff5C59FF),
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -14,6 +14,7 @@ class _TroopAppState extends ConsumerState<TroopApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
         return routesLoggedOut;
       }),
