@@ -18,7 +18,7 @@ class AuthenticationRepository {
   /// Registers user with email and password
   ///
   /// Throws [AuthException] when registration fails.
-  Future<void> registerUserWithEmailAndPassowrd(
+  Future<firebase_auth.User?> registerUserWithEmailAndPassowrd(
     String email,
     String password,
   ) async {
@@ -27,7 +27,7 @@ class AuthenticationRepository {
         email: email,
         password: password,
       );
-      await signInWithEmailAndPassword(email, password);
+      return await signInWithEmailAndPassword(email, password);
     } catch (e) {
       if (e is firebase_auth.FirebaseAuthException)
         throw _handleAuthExceptions(e, email);
@@ -38,14 +38,14 @@ class AuthenticationRepository {
   /// Logs in into the app as with Email and Password
   ///
   /// Throws [AuthException] when operation fails.
-  Future<void> signInWithEmailAndPassword(
+  Future<firebase_auth.User?> signInWithEmailAndPassword(
     String email,
     String password,
   ) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final userCred = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-          
+      return userCred.user;
     } catch (e) {
       if (e is firebase_auth.FirebaseAuthException)
         throw _handleAuthExceptions(e, email);

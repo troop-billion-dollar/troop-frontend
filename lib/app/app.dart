@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../app/navigation/routes.dart';
 import 'package:routemaster/routemaster.dart';
 
-class TroopApp extends ConsumerStatefulWidget {
+class TroopApp extends StatefulWidget {
   const TroopApp({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _TroopAppState();
+  State<StatefulWidget> createState() => _TroopAppState();
 }
 
-class _TroopAppState extends ConsumerState<TroopApp> {
+class _TroopAppState extends State<TroopApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
