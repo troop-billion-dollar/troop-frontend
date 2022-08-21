@@ -1,70 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:troop_ui/troop_ui.dart';
 
-// ignore: must_be_immutable
-class BusyButton extends StatefulWidget {
-  bool busy = false;
-  final String title;
-  final void Function()? onPressed;
-  final bool enabled;
-  final double? height;
-  final double? width;
-  final Color? buttonColor;
-  final Color? textColor;
-  final double? fontSize;
-  final BoxDecoration? decoration;
-  BusyButton({
+class TroopButton extends StatelessWidget {
+  const TroopButton({
     Key? key,
-    this.busy = false,
-    required this.title,
-    this.onPressed,
-    this.enabled = true,
-    this.fontSize,
-    this.width,
-    this.height,
-    this.buttonColor,
-    this.decoration,
-    this.textColor,
+    this.buttonTitle,
+    this.onTap,
   }) : super(key: key);
-
+  final String? buttonTitle;
+  final Function()? onTap;
   @override
-  _BusyButtonState createState() => _BusyButtonState();
-}
-
-class _BusyButtonState extends State<BusyButton> {
-  @override
-  // Widget build(BuildContext context) {
-  //   return !widget.busy
-  //       ? Container(
-  //           height: widget.height,
-  //           width: widget.width,
-  //           decoration: widget.decoration,
-  //           child: MaterialButton(
-  //             color: widget.buttonColor,
-  //             onPressed: widget.onPressed,
-  //             child: Text(
-  //               widget.title,
-  //               style: TextStyle(
-  //                 fontSize: widget.fontSize ?? 19,
-  //                 color: widget.textColor,
-  //               ),
-  //             ),
-  //           ),
-  //         )
-  //       : const Center(
-  //           child: SizedBox(),
-  //         );
-  // }
   Widget build(BuildContext context) {
     return MaterialButton(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      shape: RoundedRectangleBorder(
+        side: const BorderSide(
+          color: TroopColors.black,
+          width: 1,
+          style: BorderStyle.solid,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       height: 45,
       minWidth: double.infinity,
       color: const Color(0xff570AD6),
-      onPressed: () {},
+      onPressed: onTap,
       child: Text(
-        "Sign up",
-        style: TextStyle(
-            fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
+        buttonTitle!,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
       ),
     );
   }

@@ -169,7 +169,10 @@ class _InputFieldState extends State<InputField> {
                 : widget.suffixWidget),
         errorText: error,
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle,
+        hintStyle: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.normal,
+        ),
         helperText: validated == null ? null : null,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
