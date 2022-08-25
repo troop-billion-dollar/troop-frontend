@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:troop/app/app.dart';
 import 'package:troop_ui/troop_ui.dart';
 
 import '../../../../app/navigation/routes.dart';
-import '../../../global_widgets/global_widgets.dart';
+import '../../global_widgets/global_widgets.dart';
+
+import '../auth.dart';
 
 TextEditingController userNameCtr = TextEditingController();
 TextEditingController phoneEmailCtr = TextEditingController();
@@ -11,11 +15,15 @@ TextEditingController passwordCtr1 = TextEditingController();
 TextEditingController rePasswordCtr = TextEditingController();
 TextEditingController cityCtr = TextEditingController();
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends ConsumerWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(authNotifierProvider.notifier);
+
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       backgroundColor: const Color(0xff000321),
       body: SingleChildScrollView(
@@ -64,6 +72,11 @@ class RegisterPage extends StatelessWidget {
                   hintText: 'Username',
                   controller: userNameCtr,
                   keyboardType: TextInputType.name,
+                  validator: (value) async {
+                    if (value == null || value.isEmpty) {
+                      return 'Invalid username';
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 15,
@@ -71,6 +84,11 @@ class RegisterPage extends StatelessWidget {
                 InputField(
                   hintText: 'E-mail Address or Phone number',
                   controller: phoneEmailCtr,
+                  validator: (value) async {
+                    if (value == null || value.isEmpty) {
+                      return 'Invalid E-mail Address or Phone number';
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 15,
@@ -78,6 +96,11 @@ class RegisterPage extends StatelessWidget {
                 InputField(
                   hintText: 'Password',
                   controller: passwordCtr1,
+                  validator: (value) async {
+                    if (value == null || value.isEmpty) {
+                      return 'Invalid password';
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 15,
@@ -85,6 +108,13 @@ class RegisterPage extends StatelessWidget {
                 InputField(
                   hintText: 'Re-Password',
                   controller: rePasswordCtr,
+                  validator: (value) async {
+                    if (value == null || value.isEmpty) {
+                      return 'Invalid Re-password';
+                    } else if (value != passwordCtr1.text) {
+                      return 'Passwords don\'t match';
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 15,
@@ -92,6 +122,11 @@ class RegisterPage extends StatelessWidget {
                 InputField(
                   hintText: 'City',
                   controller: cityCtr,
+                  validator: (value) async {
+                    if (value == null || value.isEmpty) {
+                      return 'Invalid city';
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 8,
@@ -123,7 +158,22 @@ class RegisterPage extends StatelessWidget {
                 ),
                 TroopButton(
                   buttonTitle: "Sign up",
-                  onTap: () {},
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Processing Data')),
+                      );
+                    }
+                    else{
+                      ref.read(authNotifierProvider.notifier).register(
+                          userNameCtr.text,
+                          phoneEmailCtr.text,
+                          passwordCtr1.text,
+                          rePasswordCtr.text,
+                          cityCtr.text,
+                        );
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 20,

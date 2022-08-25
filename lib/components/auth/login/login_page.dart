@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:troop_ui/troop_ui.dart';
 import '../../../../app/navigation/routes.dart';
-import '../../../global_widgets/global_widgets.dart';
+import '../../global_widgets/global_widgets.dart';
+import '../auth.dart';
 
 TextEditingController passwordCtr = TextEditingController();
 TextEditingController phoneEmailUsernameCtr = TextEditingController();
