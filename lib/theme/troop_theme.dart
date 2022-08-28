@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:troop/components/auth/presentation/auth.dart';
 
 enum TroopFonts { regular, medium, bold }
 
@@ -54,6 +55,7 @@ class TroopTheme {
           fontSize: 14,
           letterSpacing: 0.02,
           height: 1.1428571429,
+          color: TroopColors.white,
         ),
         // Subtitle Medium
         subtitle1: base.subtitle1?.copyWith(
@@ -104,6 +106,7 @@ class TroopTheme {
     final ThemeData baseTheme = ThemeData();
     return baseTheme.copyWith(
       scaffoldBackgroundColor: const Color(0xff000321),
+      appBarTheme: const AppBarTheme(color: Color(0xff000321)),
       primaryColor: const Color(0xff000321),
       textTheme: _basicTypography(baseTheme.textTheme),
     );

@@ -19,4 +19,12 @@ extension BaseTextTheme on TextTheme {
       fontSize: 15,
     );
   }
+
+  TextStyle get appBarTitleStyleing {
+    return const TextStyle(
+      fontWeight: FontWeight.bold,
+      color: TroopColors.white,
+      fontSize: 20,
+    );
+  }
 }

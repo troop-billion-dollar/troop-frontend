@@ -1,3 +1,5 @@
+import 'package:troop/components/home/presentation/home_page.dart';
+
 import 'transition_page.dart' as customTransition;
 import '../../components/auth/presentation/auth.dart';
 import 'package:routemaster/routemaster.dart';
@@ -20,6 +22,9 @@ final routesLoggedOut = RouteMap(
         ),
     _register: (_) => const customTransition.TransitionPage(
           child: RegisterPage(),
+        ),
+    _home: (_) => const customTransition.TransitionPage(
+          child: HomePage(),
         ),
   },
 );

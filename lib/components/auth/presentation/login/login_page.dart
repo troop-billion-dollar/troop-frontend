@@ -62,7 +62,9 @@ class LoginPage extends StatelessWidget {
                 ),
                 TroopButton(
                   buttonTitle: "Log in",
-                  onTap: () {},
+                  onTap: () {
+                    Routemaster.of(context).replace(AppRoutes.home);
+                  },
                 ),
                 const SizedBox(
                   height: 20,
