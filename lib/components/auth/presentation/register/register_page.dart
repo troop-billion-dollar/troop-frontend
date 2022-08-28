@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:troop/theme/troop_theme_extension.dart';
 import 'package:troop_ui/troop_ui.dart';
 
 import '../../../../app/navigation/routes.dart';
@@ -17,7 +18,6 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff000321),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -31,6 +31,7 @@ class RegisterPage extends StatelessWidget {
                 Center(
                   child: Image.asset(
                     "assets/images/troop_logo.png",
+                    key: const ValueKey("troop_logo_image"),
                     height: 96,
                     width: 96,
                   ),
@@ -38,30 +39,31 @@ class RegisterPage extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                const Text(
+                Text(
                   "Welcome to Troop,",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: TroopColors.white,
-                  ),
+                  key: const ValueKey("welcome_to_troop_text"),
+                  style: Theme.of(context)
+                      .textTheme
+                      .normalSize
+                      .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 4,
                 ),
-                const Text(
+                Text(
                   "Sign Up in just 2 Steps!",
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: TroopColors.white,
-                  ),
+                  key: const ValueKey("sign_up_text"),
+                  style: Theme.of(context)
+                      .textTheme
+                      .normalSize
+                      .copyWith(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 InputField(
                   hintText: 'Username',
+                  key: const ValueKey("username_field"),
                   controller: userNameCtr,
                   keyboardType: TextInputType.name,
                 ),
@@ -70,6 +72,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 InputField(
                   hintText: 'E-mail Address or Phone number',
+                  key: const ValueKey("email_and_phone_field"),
                   controller: phoneEmailCtr,
                 ),
                 const SizedBox(
@@ -77,6 +80,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 InputField(
                   hintText: 'Password',
+                  key: const ValueKey("password_field"),
                   controller: passwordCtr1,
                 ),
                 const SizedBox(
@@ -84,6 +88,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 InputField(
                   hintText: 'Re-Password',
+                  key: const ValueKey("re_password_field"),
                   controller: rePasswordCtr,
                 ),
                 const SizedBox(
@@ -91,6 +96,7 @@ class RegisterPage extends StatelessWidget {
                 ),
                 InputField(
                   hintText: 'City',
+                  key: const ValueKey("city_field"),
                   controller: cityCtr,
                 ),
                 const SizedBox(
@@ -108,13 +114,13 @@ class RegisterPage extends StatelessWidget {
                           activeColor: TroopColors.white,
                           onChanged: ((value) {})),
                     ),
-                    const Text(
+                    Text(
                       "Agree terms and conditions",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.white,
-                      ),
+                      key: const ValueKey("agree_terms_and_conditions_text"),
+                      style: Theme.of(context)
+                          .textTheme
+                          .normalSize
+                          .copyWith(fontSize: 13),
                     ),
                   ],
                 ),
@@ -123,18 +129,20 @@ class RegisterPage extends StatelessWidget {
                 ),
                 TroopButton(
                   buttonTitle: "Sign up",
+                  key: const ValueKey("sign_up_buttpn"),
                   onTap: () {},
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const Center(
+                Center(
                   child: Text(
                     "Already have an account?",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
+                    key: const ValueKey("already_have_an_account_text"),
+                    style: Theme.of(context)
+                        .textTheme
+                        .normalSize
+                        .copyWith(fontSize: 15),
                   ),
                 ),
                 const SizedBox(
@@ -142,15 +150,11 @@ class RegisterPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () => Routemaster.of(context).replace(AppRoutes.login),
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       "Log In",
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff5C59FF),
-                        fontSize: 15,
-                      ),
+                      key: const ValueKey("login_text"),
+                      style: Theme.of(context).textTheme.underlineStyle,
                     ),
                   ),
                 ),

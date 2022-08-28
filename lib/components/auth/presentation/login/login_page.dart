@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:routemaster/routemaster.dart';
-import 'package:troop_ui/troop_ui.dart';
-import '../../../../app/navigation/routes.dart';
-import '../../../global_widgets/global_widgets.dart';
+import 'package:troop/components/auth/presentation/login/login.dart';
 
 TextEditingController passwordCtr = TextEditingController();
 TextEditingController phoneEmailUsernameCtr = TextEditingController();
@@ -13,7 +10,6 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff000321),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -27,6 +23,7 @@ class LoginPage extends StatelessWidget {
                 Center(
                   child: Image.asset(
                     "assets/images/troop_logo.png",
+                    key: const ValueKey("troop_logo_image"),
                     height: 96,
                     width: 96,
                   ),
@@ -36,6 +33,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 InputField(
                   hintText: 'Phone number, username or email',
+                  key: const ValueKey("email_and_phone_field"),
                   controller: phoneEmailUsernameCtr,
                 ),
                 const SizedBox(
@@ -48,16 +46,14 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(right: 10.0),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10.0),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
                       "Forgot password?",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: TroopColors.white,
-                      ),
+                      key: const ValueKey("forgot_password_text"),
+                      style: Theme.of(context).textTheme.normalSize,
                     ),
                   ),
                 ),
@@ -71,13 +67,14 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Center(
+                Center(
                   child: Text(
                     "Create new account?",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
+                    key: const ValueKey("create_new_account_text"),
+                    style: Theme.of(context)
+                        .textTheme
+                        .normalSize
+                        .copyWith(fontSize: 15),
                   ),
                 ),
                 const SizedBox(
@@ -86,15 +83,11 @@ class LoginPage extends StatelessWidget {
                 GestureDetector(
                   onTap: () =>
                       Routemaster.of(context).replace(AppRoutes.register),
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       "Sign Up",
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff5C59FF),
-                        fontSize: 15,
-                      ),
+                      key: const ValueKey("sign_up_text"),
+                      style: Theme.of(context).textTheme.underlineStyle,
                     ),
                   ),
                 ),

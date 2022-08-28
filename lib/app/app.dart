@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:troop/theme/troop_theme.dart';
 import '../app/navigation/routes.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -18,10 +18,7 @@ class _TroopAppState extends State<TroopApp> {
       routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
         return routesLoggedOut;
       }),
-      theme: ThemeData(
-        fontFamily: GoogleFonts.montserrat().fontFamily,
-        primaryColor: const Color(0xff000321),
-      ),
+      theme: TroopTheme.current(),
       routeInformationParser: const RoutemasterParser(),
     );
   }
