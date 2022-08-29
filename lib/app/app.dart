@@ -7,11 +7,6 @@ import 'package:troop/components/auth/auth.dart';
 import '../app/navigation/routes.dart';
 import 'package:routemaster/routemaster.dart';
 
-final authNotifierProvider = StateNotifierProvider(
-  ((ref) =>
-      AuthNotifier(authenticationRepository: RepoContainer.authRepository)),
-);
-
 class TroopApp extends ConsumerStatefulWidget {
   const TroopApp({Key? key}) : super(key: key);
 
@@ -22,15 +17,10 @@ class TroopApp extends ConsumerStatefulWidget {
 class _TroopAppState extends ConsumerState<TroopApp> {
   @override
   Widget build(BuildContext context) {
-    final state = ref.read(authNotifierProvider);
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerDelegate: RoutemasterDelegate(routesBuilder: (context) {
-        if (state is Authenticated) {
-          return routesLoggedIn;
-        }
-        return routesLoggedOut;
+        return routes;
       }),
       theme: ThemeData(
         fontFamily: GoogleFonts.montserrat().fontFamily,

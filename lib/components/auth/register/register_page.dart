@@ -1,4 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
@@ -15,17 +16,14 @@ TextEditingController phoneEmailCtr = TextEditingController();
 TextEditingController passwordCtr1 = TextEditingController();
 TextEditingController rePasswordCtr = TextEditingController();
 TextEditingController cityCtr = TextEditingController();
-bool agree = true;
 
 class RegisterPage extends ConsumerWidget {
-  const RegisterPage({Key? key}) : super(key: key);
-
+  RegisterPage({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(authNotifierProvider.notifier);
-
-    final _formKey = GlobalKey<FormState>();
-
+    final notifier = ref.read(authNotifierProvider.notifier);
+    final state = ref.watch(authNotifierProvider);
     return Scaffold(
       backgroundColor: const Color(0xff000321),
       body: SingleChildScrollView(
@@ -80,6 +78,7 @@ class RegisterPage extends ConsumerWidget {
                       if (value == null || value.isEmpty) {
                         return 'Invalid username';
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -92,6 +91,7 @@ class RegisterPage extends ConsumerWidget {
                       if (value == null || value.isEmpty) {
                         return 'Invalid E-mail Address or Phone number';
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -99,11 +99,13 @@ class RegisterPage extends ConsumerWidget {
                   ),
                   InputField(
                     hintText: 'Password',
+                    shouldObscure: true,
                     controller: passwordCtr1,
                     validator: (value) async {
                       if (value == null || value.isEmpty) {
                         return 'Invalid password';
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -111,6 +113,7 @@ class RegisterPage extends ConsumerWidget {
                   ),
                   InputField(
                     hintText: 'Re-Password',
+                    shouldObscure: true,
                     controller: rePasswordCtr,
                     validator: (value) async {
                       if (value == null || value.isEmpty) {
@@ -118,6 +121,7 @@ class RegisterPage extends ConsumerWidget {
                       } else if (value != passwordCtr1.text) {
                         return 'Passwords don\'t match';
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -130,6 +134,7 @@ class RegisterPage extends ConsumerWidget {
                       if (value == null || value.isEmpty) {
                         return 'Invalid city';
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(
@@ -143,10 +148,10 @@ class RegisterPage extends ConsumerWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            value: agree,
+                            value: notifier.agreetoterms,
                             activeColor: TroopColors.white,
                             onChanged: ((value) {
-                              agree = value!;
+                              notifier.toggleterms();
                             })),
                       ),
                       const Text(
@@ -169,16 +174,14 @@ class RegisterPage extends ConsumerWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        ref.read(authNotifierProvider.notifier).register(
-                              userNameCtr.text,
-                              phoneEmailCtr.text,
-                              passwordCtr1.text,
-                              rePasswordCtr.text,
-                              cityCtr.text,
-                            );
-                        if (ref.read(authNotifierProvider.notifier).state
-                            is Unauthenticated) {
-                          print('Unauthenticated----');
+                        notifier.register(
+                          userNameCtr.text,
+                          phoneEmailCtr.text,
+                          passwordCtr1.text,
+                          rePasswordCtr.text,
+                          cityCtr.text,
+                        );
+                        if (state is Authenticated) {
                           Routemaster.of(context).replace(AppRoutes.home);
                         }
                       } else {

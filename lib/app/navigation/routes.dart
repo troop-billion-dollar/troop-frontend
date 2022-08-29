@@ -14,18 +14,15 @@ abstract class AppRoutes {
   static String get register => _register;
 }
 
-final routesLoggedOut = RouteMap(
+final routes = RouteMap(
   onUnknownRoute: (_) => const Redirect(_login),
   routes: {
     _login: (_) => const customTransition.TransitionPage(
           child: LoginPage(),
         ),
-    _register: (_) => const customTransition.TransitionPage(
+    _register: (_) => customTransition.TransitionPage(
           child: RegisterPage(),
         ),
+    _home: (_) => const customTransition.TransitionPage(child: HomePage()),
   },
 );
-
-final routesLoggedIn = RouteMap(routes: {
-  _home: (_) => const customTransition.TransitionPage(child: HomePage())
-});

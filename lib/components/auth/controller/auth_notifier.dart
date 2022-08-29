@@ -1,13 +1,29 @@
+import 'dart:developer';
+
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:troop/components/auth/controller/auth_states.dart';
+
+import '../../../app/repo_container.dart';
+
+final authNotifierProvider = StateNotifierProvider(
+  ((ref) =>
+      AuthNotifier(authenticationRepository: RepoContainer.authRepository)),
+);
 
 class AuthNotifier extends StateNotifier<AuthState> {
   final AuthenticationRepository authenticationRepository;
 
   AuthNotifier({required this.authenticationRepository})
       : super(Unauthenticated());
+
+  bool agreetoterms = false;
+
+  void toggleterms() {
+    agreetoterms = !agreetoterms;
+    state = Unauthenticated();
+  }
 
   Future<void> register(String username, String email, String password,
       String repassword, String city) async {
@@ -16,8 +32,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
       User? user = await authenticationRepository
           .registerUserWithEmailAndPassowrd(email, password);
-      state = Authenticated(user: user)..isLoading = false;
-      print('user' + user!.email!);
+      state = Authenticated(user: user);
     } catch (e) {
       state = Unauthenticated();
     }
