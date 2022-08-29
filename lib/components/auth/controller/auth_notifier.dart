@@ -16,16 +16,22 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
       User? user = await authenticationRepository
           .registerUserWithEmailAndPassowrd(email, password);
-      state = Authenticated(user: user)..isLoading;
+      state = Authenticated(user: user)..isLoading = false;
+      print('user' + user!.email!);
     } catch (e) {
       state = Unauthenticated();
     }
   }
 
-  Future<void> login() async {
+  Future<void> login(String username, String password) async {
     try {
       state = Unauthenticated()..isLoading = true;
-    } catch (e) {}
+      User? user = await authenticationRepository.signInWithEmailAndPassword(
+          username, password);
+      state = Authenticated(user: user);
+    } catch (e) {
+      state = Unauthenticated();
+    }
   }
 
   Future<void> forgotPassword() async {
@@ -36,7 +42,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   Future<void> logout() async {
     try {
-      state = Unauthenticated()..isLoading = true;
+      state = Unauthenticated();
     } catch (e) {}
   }
 }
