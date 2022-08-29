@@ -169,12 +169,12 @@ class RegisterPage extends ConsumerWidget {
                   ),
                   TroopButton(
                     buttonTitle: "Sign up",
-                    onTap: () {
+                    onTap: () async {
                       if (_formKey.currentState!.validate()) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        notifier.register(
+                        await notifier.register(
                           userNameCtr.text,
                           phoneEmailCtr.text,
                           passwordCtr1.text,
