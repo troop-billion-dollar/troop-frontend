@@ -5,13 +5,13 @@ import 'package:troop/app/navigation/routes.dart';
 
 import '../auth/controller/auth_notifier.dart';
 
+//TODO: Implement routing without context
 class HomePage extends ConsumerWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(authNotifierProvider.notifier);
-    final state = ref.watch(authNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),

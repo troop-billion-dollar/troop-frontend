@@ -1,9 +1,6 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:troop/app/repo_container.dart';
-import 'package:troop/components/auth/auth.dart';
 import '../app/navigation/routes.dart';
 import 'package:routemaster/routemaster.dart';
 

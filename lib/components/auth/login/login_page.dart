@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
@@ -10,16 +7,13 @@ import '../../../../app/navigation/routes.dart';
 import '../../global_widgets/global_widgets.dart';
 import '../auth.dart';
 
-TextEditingController passwordCtr = TextEditingController();
-TextEditingController phoneEmailUsernameCtr = TextEditingController();
-
+//TODO: Implement routing without context
 class LoginPage extends ConsumerWidget {
   LoginPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(authNotifierProvider.notifier);
-    final state = ref.watch(authNotifierProvider);
 
     return Scaffold(
       backgroundColor: const Color(0xff000321),
@@ -46,27 +40,17 @@ class LoginPage extends ConsumerWidget {
                     height: 60,
                   ),
                   InputField(
-                    hintText: 'Phone number, username or email',
-                    controller: phoneEmailUsernameCtr,
-                    validator: (value) async {
-                      if (value == null || value.isEmpty) {
-                        return 'Invalid username';
-                      }
-                      return null;
-                    },
+                    hintText: 'Email',
+                    controller: notifier.phoneEmailUsernameCtr,
+                    validator: notifier.emailValidator,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   InputField(
                     hintText: 'Password',
-                    controller: passwordCtr,
-                    validator: (value) async {
-                      if (value == null || value.isEmpty) {
-                        return 'Invalid password';
-                      }
-                      return null;
-                    },
+                    controller: notifier.passwordCtr,
+                    validator: notifier.passwordValidator,
                   ),
                   const SizedBox(
                     height: 15,
@@ -95,13 +79,21 @@ class LoginPage extends ConsumerWidget {
                           const SnackBar(content: Text('Processing Data')),
                         );
                       }
-                      if (validateEmail(phoneEmailUsernameCtr.text)) {
-                        await notifier.login(
-                            phoneEmailUsernameCtr.text, passwordCtr.text);
-                      }
-                      log(state.runtimeType.toString());
-                      if (state is Authenticated) {
-                        Routemaster.of(context).replace(AppRoutes.home);
+                      if (validateEmail(notifier.phoneEmailUsernameCtr.text)) {
+                        final e = await notifier.login(
+                            notifier.phoneEmailUsernameCtr.text,
+                            notifier.passwordCtr.text);
+                        if (e == null) {
+                          Routemaster.of(context).replace(AppRoutes.home);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(e)),
+                          );
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Invalid credentials')),
+                        );
                       }
                     },
                   ),

@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:troop/app/utils.dart';
 import 'package:troop_ui/troop_ui.dart';
 
 import '../../../../app/navigation/routes.dart';
@@ -11,20 +8,14 @@ import '../../global_widgets/global_widgets.dart';
 
 import '../auth.dart';
 
-TextEditingController userNameCtr = TextEditingController();
-TextEditingController phoneEmailCtr = TextEditingController();
-TextEditingController passwordCtr1 = TextEditingController();
-TextEditingController rePasswordCtr = TextEditingController();
-TextEditingController cityCtr = TextEditingController();
-
+//TODO: Implement routing without context
 class RegisterPage extends ConsumerWidget {
   RegisterPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(authNotifierProvider.notifier);
-    final state = ref.watch(authNotifierProvider);
-
+    
     return Scaffold(
       backgroundColor: const Color(0xff000321),
       body: SingleChildScrollView(
@@ -73,7 +64,7 @@ class RegisterPage extends ConsumerWidget {
                   ),
                   InputField(
                     hintText: 'Username',
-                    controller: userNameCtr,
+                    controller: notifier.userNameCtr,
                     keyboardType: TextInputType.name,
                     validator: (value) async {
                       if (value == null || value.isEmpty) {
@@ -86,15 +77,9 @@ class RegisterPage extends ConsumerWidget {
                     height: 15,
                   ),
                   InputField(
-                    hintText: 'E-mail Address or Phone number',
-                    controller: phoneEmailCtr,
-                    validator: (value) async {
-                      if (!validateEmail(phoneEmailCtr.text) &&
-                          !validatePhoneNumber(phoneEmailCtr.text)) {
-                        return 'Invalid E-mail Address or Phone number';
-                      }
-                      return null;
-                    },
+                    hintText: 'E-mail Address',
+                    controller: notifier.phoneEmailCtr,
+                    validator: notifier.emailValidator,
                   ),
                   const SizedBox(
                     height: 15,
@@ -102,15 +87,8 @@ class RegisterPage extends ConsumerWidget {
                   InputField(
                     hintText: 'Password',
                     shouldObscure: true,
-                    controller: passwordCtr1,
-                    validator: (value) async {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter password';
-                      } else if (value.length < 8) {
-                        return 'Please enter password with atleast 8 characters';
-                      }
-                      return null;
-                    },
+                    controller: notifier.passwordCtr1,
+                    validator: notifier.passwordValidator,
                   ),
                   const SizedBox(
                     height: 15,
@@ -118,11 +96,11 @@ class RegisterPage extends ConsumerWidget {
                   InputField(
                     hintText: 'Re-Password',
                     shouldObscure: true,
-                    controller: rePasswordCtr,
+                    controller: notifier.rePasswordCtr,
                     validator: (value) async {
                       if (value == null ||
                           value.isEmpty ||
-                          value != passwordCtr1.text) {
+                          value != notifier.passwordCtr1.text) {
                         return 'Passwords don\'t match';
                       }
                       return null;
@@ -133,7 +111,7 @@ class RegisterPage extends ConsumerWidget {
                   ),
                   InputField(
                     hintText: 'City',
-                    controller: cityCtr,
+                    controller: notifier.cityCtr,
                     validator: (value) async {
                       if (value == null || value.isEmpty) {
                         return 'Invalid city';
@@ -178,16 +156,13 @@ class RegisterPage extends ConsumerWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Processing Data')),
                         );
-                        await notifier.register(
-                          userNameCtr.text,
-                          phoneEmailCtr.text,
-                          passwordCtr1.text,
-                          rePasswordCtr.text,
-                          cityCtr.text,
-                        );
-                        log('app ' + state.runtimeType.toString());
-                        if (state is Authenticated) {
+                        final e = await notifier.register();
+                        if (e == null) {
                           Routemaster.of(context).replace(AppRoutes.home);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(e)),
+                          );
                         }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
