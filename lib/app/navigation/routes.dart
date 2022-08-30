@@ -17,7 +17,7 @@ abstract class AppRoutes {
 final routes = RouteMap(
   onUnknownRoute: (_) => const Redirect(_login),
   routes: {
-    _login: (_) => const customTransition.TransitionPage(
+    _login: (_) => customTransition.TransitionPage(
           child: LoginPage(),
         ),
     _register: (_) => customTransition.TransitionPage(

@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:troop/app/app.dart';
+import 'package:troop/app/utils.dart';
 import 'package:troop_ui/troop_ui.dart';
 
 import '../../../../app/navigation/routes.dart';
@@ -24,6 +24,7 @@ class RegisterPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(authNotifierProvider.notifier);
     final state = ref.watch(authNotifierProvider);
+
     return Scaffold(
       backgroundColor: const Color(0xff000321),
       body: SingleChildScrollView(
@@ -88,7 +89,8 @@ class RegisterPage extends ConsumerWidget {
                     hintText: 'E-mail Address or Phone number',
                     controller: phoneEmailCtr,
                     validator: (value) async {
-                      if (value == null || value.isEmpty) {
+                      if (!validateEmail(phoneEmailCtr.text) &&
+                          !validatePhoneNumber(phoneEmailCtr.text)) {
                         return 'Invalid E-mail Address or Phone number';
                       }
                       return null;
@@ -103,7 +105,9 @@ class RegisterPage extends ConsumerWidget {
                     controller: passwordCtr1,
                     validator: (value) async {
                       if (value == null || value.isEmpty) {
-                        return 'Invalid password';
+                        return 'Please enter password';
+                      } else if (value.length < 8) {
+                        return 'Please enter password with atleast 8 characters';
                       }
                       return null;
                     },
@@ -116,9 +120,9 @@ class RegisterPage extends ConsumerWidget {
                     shouldObscure: true,
                     controller: rePasswordCtr,
                     validator: (value) async {
-                      if (value == null || value.isEmpty) {
-                        return 'Invalid Re-password';
-                      } else if (value != passwordCtr1.text) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          value != passwordCtr1.text) {
                         return 'Passwords don\'t match';
                       }
                       return null;
@@ -181,6 +185,7 @@ class RegisterPage extends ConsumerWidget {
                           rePasswordCtr.text,
                           cityCtr.text,
                         );
+                        log('app ' + state.runtimeType.toString());
                         if (state is Authenticated) {
                           Routemaster.of(context).replace(AppRoutes.home);
                         }

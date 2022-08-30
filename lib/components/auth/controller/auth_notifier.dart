@@ -18,7 +18,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   AuthNotifier({required this.authenticationRepository})
       : super(Unauthenticated());
 
-  bool agreetoterms = false;
+  bool agreetoterms = true;
 
   void toggleterms() {
     agreetoterms = !agreetoterms;
@@ -29,35 +29,34 @@ class AuthNotifier extends StateNotifier<AuthState> {
       String repassword, String city) async {
     try {
       state = Unauthenticated()..isLoading = true;
-
       User? user = await authenticationRepository
           .registerUserWithEmailAndPassowrd(email, password);
-      state = Authenticated(user: user);
-    } catch (e) {
+      state = Authenticated(user: user)..isLoading = false;
+    } on AuthException catch (e) {
+      log(e.message);
       state = Unauthenticated();
     }
+    log(state.runtimeType.toString());
   }
 
-  Future<void> login(String username, String password) async {
+  Future<void> login(String email, String password) async {
     try {
       state = Unauthenticated()..isLoading = true;
       User? user = await authenticationRepository.signInWithEmailAndPassword(
-          username, password);
-      state = Authenticated(user: user);
-    } catch (e) {
-      state = Unauthenticated();
+          email, password);
+      state = Authenticated(user: user)..isLoading = false;
+    } on AuthException catch (e) {
+      log(e.message);
+      state = Unauthenticated()..isLoading = false;
     }
+    log(state.runtimeType.toString());
   }
 
   Future<void> forgotPassword() async {
-    try {
-      state = Unauthenticated()..isLoading = true;
-    } catch (e) {}
+    //TODO: implement forgotPassword
   }
 
   Future<void> logout() async {
-    try {
-      state = Unauthenticated();
-    } catch (e) {}
+    state = Unauthenticated()..isLoading = false;
   }
 }
