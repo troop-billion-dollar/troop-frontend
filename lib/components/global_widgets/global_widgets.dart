@@ -1,2 +1,2 @@
-export 'troop_Button.dart';
-export 'inputTextField.dart';
+export 'troop_button.dart';
+export 'input_text_field.dart';

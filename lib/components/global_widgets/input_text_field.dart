@@ -57,7 +57,7 @@ class InputField extends StatefulWidget {
   final Color success;
   final Color failure;
   final TextStyle? hintStyle;
-  InputField({
+  const InputField({
     Key? key,
     this.controller,
     this.validator,
@@ -78,10 +78,10 @@ class InputField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _InputFieldState createState() => _InputFieldState();
+  InputFieldState createState() => InputFieldState();
 }
 
-class _InputFieldState extends State<InputField> {
+class InputFieldState extends State<InputField> {
   late bool obscureText;
   bool? validated;
   bool? inProcess;
@@ -95,26 +95,30 @@ class _InputFieldState extends State<InputField> {
 
   Widget? getTickWidget() {
     if (validated == null) return null;
-    if (inProcess != null) if (inProcess!)
-      return Container(
-        height: MediaQuery.of(context).size.height / 50,
-        width: MediaQuery.of(context).size.height / 50,
-        padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height / 80,
-          horizontal: MediaQuery.of(context).size.height / 80,
-        ),
-        child: Center(child: CircularProgressIndicator()),
-      );
-    if (validated!)
-      return Icon(
+    if (inProcess != null) {
+      if (inProcess!) {
+        return Container(
+          height: MediaQuery.of(context).size.height / 50,
+          width: MediaQuery.of(context).size.height / 50,
+          padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height / 80,
+            horizontal: MediaQuery.of(context).size.height / 80,
+          ),
+          child: const Center(child: CircularProgressIndicator()),
+        );
+      }
+    }
+    if (validated!) {
+      return const Icon(
         Icons.check,
         color: Colors.green,
       );
-    else
-      return Icon(
+    } else {
+      return const Icon(
         Icons.error,
         color: Colors.red,
       );
+    }
   }
 
   @override

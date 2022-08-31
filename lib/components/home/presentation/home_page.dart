@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             height: 100,
           ),
-          Container(
+          SizedBox(
             height: 26,
             width: double.infinity,
             child: Text(

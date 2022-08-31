@@ -1,3 +1,5 @@
+// ignore_for_file: overridden_fields
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

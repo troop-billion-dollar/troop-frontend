@@ -413,6 +413,7 @@ class _ResizePoint extends StatelessWidget {
     Key? key,
     required this.onDrag,
     required this.type,
+    // ignore: unused_element
     this.onScale,
   }) : super(key: key);
 

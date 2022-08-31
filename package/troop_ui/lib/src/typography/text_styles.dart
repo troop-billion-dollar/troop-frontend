@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:troop_ui/troop_ui.dart';
 
-import 'font_weights.dart';
-
-/// Photobooth Text Style Definitions
-class PhotoboothTextStyle {
+/// Troop Text Style Definitions
+class TroopTextStyle {
   static const _baseTextStyle = TextStyle(
     package: 'troop_ui',
     fontFamily: 'GoogleSans',

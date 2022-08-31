@@ -1,0 +1,105 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "troop-frontend",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "troop-frontend (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "troop-frontend (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "analytics",
+            "cwd": "package\\analytics",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "analytics (profile mode)",
+            "cwd": "package\\analytics",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "analytics (release mode)",
+            "cwd": "package\\analytics",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "authentication_repository",
+            "cwd": "package\\authentication_repository",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "authentication_repository (profile mode)",
+            "cwd": "package\\authentication_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "authentication_repository (release mode)",
+            "cwd": "package\\authentication_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "platform_helper",
+            "cwd": "package\\platform_helper",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "platform_helper (profile mode)",
+            "cwd": "package\\platform_helper",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "platform_helper (release mode)",
+            "cwd": "package\\platform_helper",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "troop_ui",
+            "cwd": "package\\troop_ui",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "troop_ui (profile mode)",
+            "cwd": "package\\troop_ui",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "troop_ui (release mode)",
+            "cwd": "package\\troop_ui",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
