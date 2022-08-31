@@ -1,5 +1,7 @@
+import 'package:troop/components/home/home_page.dart';
+
 import 'transition_page.dart' as customTransition;
-import '../../components/auth/presentation/auth.dart';
+import '../../components/auth/auth.dart';
 import 'package:routemaster/routemaster.dart';
 
 const _login = '/login';
@@ -12,14 +14,15 @@ abstract class AppRoutes {
   static String get register => _register;
 }
 
-final routesLoggedOut = RouteMap(
+final routes = RouteMap(
   onUnknownRoute: (_) => const Redirect(_login),
   routes: {
-    _login: (_) => const customTransition.TransitionPage(
+    _login: (_) => customTransition.TransitionPage(
           child: LoginPage(),
         ),
-    _register: (_) => const customTransition.TransitionPage(
+    _register: (_) => customTransition.TransitionPage(
           child: RegisterPage(),
         ),
+    _home: (_) => const customTransition.TransitionPage(child: HomePage()),
   },
 );
